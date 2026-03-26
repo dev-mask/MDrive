@@ -262,6 +262,10 @@ const Drive = {
     },
 
     // ==================== EVENT HANDLERS ====================
+    isTouchDevice() {
+        return ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (window.innerWidth <= 768);
+    },
+
     handleFileClick(e, file) {
         // Check if clicking the checkbox directly
         const isCheckboxClick = e.target.closest('.file-checkbox');
@@ -272,8 +276,17 @@ const Drive = {
         } else if (e.shiftKey && this.selectedFile) {
             // Range select from last selected to this file
             this.rangeSelect(file);
+        } else if (this.isTouchDevice() && this.selectedFiles.length === 0) {
+            // Mobile: single tap opens folder/file directly (when not multi-selecting)
+            if (file.isFolder) {
+                this.openFolder(file.id, file.name);
+                return;
+            } else if (file.webViewLink) {
+                window.open(file.webViewLink, '_blank');
+                return;
+            }
         } else {
-            // Normal single click — clear others
+            // Desktop: Normal single click — select the item
             this.clearSelection();
             e.currentTarget.classList.add('selected');
             this.selectedFile = file;

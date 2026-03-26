@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MDrive — Sign In</title>
     <meta name="description" content="MDrive - A modern Google Drive file manager. Sign in with your Google account to manage your files.">
+    <link rel="icon" type="image/png" href="/MDrive/public/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/MDrive/public/css/style.css">
     <style>
         .login-page {
@@ -17,117 +18,152 @@
             justify-content: center;
             background: var(--login-bg);
             position: relative;
+            overflow: hidden;
         }
 
-        /* Subtle green gradient band at top */
+        /* Ambient gradient orbs */
         .login-page::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(180deg, #dcfce7 0%, var(--login-bg) 100%);
+            top: -20%;
+            left: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(59, 123, 140, 0.08) 0%, transparent 70%);
             pointer-events: none;
+            animation: ambientFloat 20s ease-in-out infinite;
+        }
+
+        .login-page::after {
+            content: '';
+            position: absolute;
+            bottom: -15%;
+            right: -5%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(146, 208, 227, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+            animation: ambientFloat 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes ambientFloat {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(30px, -20px); }
+            66% { transform: translate(-20px, 15px); }
         }
 
         .login-card {
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 440px;
+            max-width: 460px;
             margin: 20px;
-            padding: 40px 36px;
-            background: var(--bg-primary);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-md);
-            animation: cardSlideUp 0.5s ease;
+            padding: 44px 40px;
+            background: var(--glass-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--shadow-xl);
+            animation: cardSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes cardSlideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(24px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         .login-logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 8px;
         }
 
         .login-logo-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 10px;
-            background: var(--color-primary);
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .login-logo-icon svg {
-            width: 24px;
-            height: 24px;
-            color: white;
+        .login-logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .login-logo h1 {
-            font-size: 24px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 26px;
             font-weight: 700;
             color: var(--text-primary);
-            letter-spacing: -0.5px;
+            letter-spacing: -0.8px;
         }
 
         .login-subtitle {
             color: var(--text-secondary);
-            font-size: 14px;
+            font-size: 14.5px;
             margin-bottom: 32px;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         .login-btn-google {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
-            padding: 12px 24px;
+            padding: 13px 24px;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: var(--radius-full);
             background: var(--bg-primary);
             color: var(--text-primary);
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             text-decoration: none;
             font-family: 'Inter', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn-google::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--color-primary-glow);
+            opacity: 0;
+            transition: opacity 0.25s ease;
         }
 
         .login-btn-google:hover {
             border-color: var(--color-primary);
-            background: var(--bg-hover);
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-sm);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(59, 123, 140, 0.12), 0 0 0 1px var(--color-primary);
+        }
+
+        .login-btn-google:hover::before {
+            opacity: 1;
         }
 
         .login-btn-google svg {
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             flex-shrink: 0;
         }
 
         .login-divider {
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin: 24px 0;
+            gap: 16px;
+            margin: 28px 0;
             color: var(--text-muted);
             font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             font-weight: 500;
         }
 
@@ -148,30 +184,36 @@
         .login-feature {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px;
-            border-radius: 10px;
+            gap: 11px;
+            padding: 14px;
+            border-radius: var(--radius-md);
             background: var(--bg-secondary);
             font-size: 13px;
             color: var(--text-secondary);
             font-weight: 500;
-            transition: all 0.15s;
+            transition: all 0.2s ease;
         }
 
         .login-feature:hover {
             background: var(--bg-tertiary);
+            transform: translateY(-1px);
         }
 
         .login-feature-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            background: rgba(22, 163, 74, 0.1);
-            color: #16a34a;
+            background: rgba(59, 123, 140, 0.10);
+            color: #3B7B8C;
+        }
+
+        [data-theme="dark"] .login-feature-icon {
+            background: rgba(146, 208, 227, 0.10);
+            color: #92D0E3;
         }
 
         .login-feature-icon svg {
@@ -181,15 +223,15 @@
 
         .login-error {
             background: rgba(239, 68, 68, 0.06);
-            border: 1px solid rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.12);
             color: var(--color-danger);
-            padding: 10px 14px;
-            border-radius: 8px;
-            margin-bottom: 16px;
+            padding: 11px 16px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 18px;
             font-size: 13px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .login-error svg {
@@ -199,7 +241,7 @@
         }
 
         .login-footer {
-            margin-top: 28px;
+            margin-top: 32px;
             text-align: center;
             font-size: 12px;
             color: var(--text-muted);
@@ -215,7 +257,7 @@
 
         @media (max-width: 480px) {
             .login-card {
-                padding: 28px 20px;
+                padding: 28px 22px;
                 margin: 16px;
             }
             .login-features {
@@ -227,13 +269,10 @@
 <body>
     <div class="login-page">
         <div class="login-card">
-            <div class="login-logo">
-                <div class="login-logo-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
-                    </svg>
+            <div class="login-logo" style="justify-content:center;margin-bottom:16px;">
+                <div class="login-logo-icon" style="width:180px;height:56px;">
+                    <img src="/MDrive/public/logo.png" alt="MDrive Logo" width="180" height="56">
                 </div>
-                <h1>MDrive</h1>
             </div>
 
             <p class="login-subtitle">Your modern Google Drive file manager. Sign in to access, organize, and manage your cloud files.</p>
