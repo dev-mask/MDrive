@@ -373,6 +373,7 @@ const Drive = {
     },
 
     handleFileDoubleClick(file) {
+        this.clearSelection();
         if (file.isFolder) {
             this.openFolder(file.id, file.name);
         } else if (file.webViewLink) {

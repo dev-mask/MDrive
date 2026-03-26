@@ -40,6 +40,10 @@
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                     Upload
                 </button>
+                <button class="btn btn-secondary btn-upload" id="btn-upload-folder" title="Upload folder">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><polyline points="12 11 12 17"/><polyline points="9 14 12 11 15 14"/></svg>
+                    Upload Folder
+                </button>
             </div>
 
             <nav class="sidebar-nav">
@@ -170,8 +174,9 @@
         </div>
     </div>
 
-    <!-- ==================== HIDDEN FILE INPUT ==================== -->
+    <!-- ==================== HIDDEN FILE INPUTS ==================== -->
     <input type="file" id="file-input" multiple style="display:none;">
+    <input type="file" id="folder-input" webkitdirectory directory multiple style="display:none;">
 
     <!-- ==================== CONTEXT MENU ==================== -->
     <div class="context-menu" id="context-menu" style="display:none;">
