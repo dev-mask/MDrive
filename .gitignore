@@ -1,0 +1,27 @@
+# Dependencies
+/vendor/
+
+# Environment & secrets
+.env
+storage/encryption.key
+
+# IDE & OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+Thumbs.db
+.DS_Store
+
+# Logs
+*.log
+/storage/logs/
+
+# Compiled / cache
+/storage/cache/
+/storage/sessions/
+
+# Node (if ever used)
+node_modules/
+package-lock.json
